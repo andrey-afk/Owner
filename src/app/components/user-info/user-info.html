@@ -1,0 +1,49 @@
+
+<div class="container" >
+  <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <p>Фамилия    <input type="text" class="input-group-text" formControlName="aFirstName"></p>
+    <p>Имя     <input type="text" class="input-group-text" formControlName="aMiddleName"></p>
+    <p>Отчество  <input type="text" class="input-group-text" formControlName="aLastName"></p>
+    <h1>Автомобили</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Номер</th>
+        <th>Марка</th>
+        <th>Модель</th>
+        <th>Год</th>
+      </tr>
+    </thead>
+
+    <tbody formArrayName="aCars">
+
+      <tr  *ngFor="let carsGroup of carsControl['controls']; let i = index">
+
+        <ng-container [formGroupName]="i">
+        <td><input type="text" formControlName="aCarNumber" > </td>
+<!--        <ng-container *ngIf="carsGroup.get(['aCarNumber']).invalid && carsGroup.get(['aCarNumber']).dirty">-->
+<!--          <small>Номер должен выглядеть так: АХ1111НР </small>-->
+<!--        </ng-container>-->
+        <td><input type="text" formControlName="aCarBrand">  </td>
+        <td><input type="text" formControlName="aCarModel">  </td>
+        <td><input type="number" min="1990" max="2021" value="1990" step="1" formControlName="aCarYear">   </td>
+<!--        <ng-container *ngIf="form.controls['aCarYear'].invalid  && form.controls['aCarYear'].dirty">-->
+<!--          <small>Год машины должен содержать 4 цыфры в диапозоне от 1990 до 2021 </small>-->
+<!--        </ng-container>-->
+          <td> <button class="alert-danger" (click)="onDelete(i)">Удалить </button> </td>
+        </ng-container>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+    <button class="btn btn-success" (click)="addNewCar()"> Добавить автомобиль</button>
+    <button type="submit" [disabled]="!form.valid" class="btn btn-danger">Сохранить</button>
+    <button class="btn btn-secondary" routerLink="/">Назад</button>
+  </form>
+
+</div>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Владельцы автомобилей</h1>
+  <button class="btn btn-primary" routerLink="/add">Добавить</button>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Фамалия</th>
+    <th>Имя</th>
+    <th>Отчество</th>
+    <th>Количетсов Автомобилей</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let user of owners">
+    <tr>
+      <td><span>{{user.aFirstName}}</span></td>
+      <td><span>{{user.aMiddleName}}</span></td>
+      <td><span>{{user.aLastName}}</span></td>
+      <td><span>{{user.aCars.length}} </span></td>
+      <button class="btn btn-secondary" [routerLink]="'edit/' + user.id">Редактировать</button>
+      <button class="btn btn-danger" (click)="onDelete(user.id)">Удалить</button>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<router-outlet></router-outlet>
